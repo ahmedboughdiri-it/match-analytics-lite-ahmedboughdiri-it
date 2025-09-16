@@ -28,10 +28,10 @@ This project is a 24-hour hands-on challenge designed to test full-stack fundame
 docker-compose up --build
 
 The backend will be available at: http://localhost:9090
-
 The frontend will be available at: http://localhost:4200 (if included in Docker)
 
-Option 2: Running Frontend Locally
+
+### **Option 2: Running Frontend Locally
 
 Navigate to the frontend/matchanalytics folder:
 cd frontend
