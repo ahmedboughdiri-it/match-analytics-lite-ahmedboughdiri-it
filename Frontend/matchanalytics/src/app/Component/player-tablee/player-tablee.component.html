@@ -1,0 +1,82 @@
+<!-- Updated player-tablee.component.html -->
+<div class="analytics-dashboard">
+  <div class="dashboard-header">
+    <h1><i class="icon-football"></i> Football Performance Analytics</h1>
+    <p class="match-date">Match Analysis • Premier League</p>
+  </div>
+
+  <div *ngIf="error() as err" class="error-alert">
+    <i class="icon-warning"></i>
+    <span>{{ err }}</span>
+  </div>
+
+  <div class="stats-container">
+    <div class="players-table-section">
+      <div class="section-header">
+        <h2><i class="icon-players"></i> Player Statistics</h2>
+        <div class="stats-summary">
+          <span class="summary-item">{{ players().length }} Players</span>
+          <span class="summary-item">{{ getTotalGoals() }} Goals</span>
+          <span class="summary-item">{{ getTotalAssists() }} Assists</span>
+        </div>
+      </div>
+
+      <div class="table-container" *ngIf="players().length > 0; else loading">
+        <table class="players-table">
+          <thead>
+            <tr>
+              <th class="text-left">Player</th>
+              <th>Team</th>
+              <th>Position</th>
+              <th><i class="icon-goal"></i> G</th>
+              <th><i class="icon-assist"></i> A</th>
+              <th class="rating-col">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of players()" [class.high-rated]="(playerStats()[p.idPlayer]?.rating || 0) >= 8">
+              <td class="player-cell">
+                <div class="player-info">
+                  <div class="shirt-number">{{ p.idPlayer }}</div>
+                  <div class="player-name">{{ p.name }}</div>
+                </div>
+              </td>
+              <td>
+                <span class="team-badge">{{ p.team }}</span>
+              </td>
+              <td><span class="position-label">{{ p.position }}</span></td>
+              <td class="stat-value">{{ playerStats()[p.idPlayer]?.goals || 0 }}</td>
+              <td class="stat-value">{{ playerStats()[p.idPlayer]?.assists || 0 }}</td>
+              <td class="rating-cell">
+                <div class="rating-display">
+                  {{ playerStats()[p.idPlayer]?.rating || 0 }}
+                  <div class="rating-bar" [style.width.%]="((playerStats()[p.idPlayer]?.rating || 0) / 10) * 100"></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="charts-section">
+      <div class="section-header">
+        <h2><i class="icon-stats"></i> Performance Metrics</h2>
+      </div>
+      <div class="chart-container">
+        <canvas baseChart
+          [data]="barChartData"
+          [type]="barChartType"
+          [options]="barChartOptions">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Loading player data...</p>
+    </div>
+  </ng-template>
+</div>

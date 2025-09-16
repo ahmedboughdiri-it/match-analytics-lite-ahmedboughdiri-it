@@ -11,9 +11,12 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +28,15 @@ public class Match {
     private int homeScore;
     private int awayScore;
 
-    // One-to-Many for players
-    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // Many-to-Many for participating players
+    @ManyToMany
+    @JoinTable(
+            name = "match_player",
+            joinColumns = @JoinColumn(name = "match_id"),
+            inverseJoinColumns = @JoinColumn(name = "player_id")
+    )
     private List<Player> players;
 
-    // One-to-Many for events
-    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
     private List<Event> events;
 }
-

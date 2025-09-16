@@ -1,5 +1,6 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,4 +29,10 @@ public class Player {
     public enum Position {
         GK, DEF, MID, FWD
     }
+
+    // Simple Many-to-One to Match
+    @ManyToOne
+    @JoinColumn(name = "match_id")
+    @JsonIgnore // avoid recursion
+    private Match match;
 }

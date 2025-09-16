@@ -21,8 +21,11 @@ EventRepo eventRepo;
 PlayerRepo playerRepo;
 
     //******************** MATCH ********************
+    // Simple getMatch, returns the first match in DB
     public Match getMatch() {
-        return matchRepo.findAll().stream().findFirst()
+        return matchRepo.findAll()
+                .stream()
+                .findFirst()
                 .orElseThrow(() -> new RuntimeException("No match found"));
     }
 

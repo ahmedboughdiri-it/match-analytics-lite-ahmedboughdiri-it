@@ -29,16 +29,16 @@ public class Event {
     @JoinColumn(name = "player_id")
     private Player player;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "match_id")
+    private Match match;
+
     @ManyToOne
     @JoinColumn(name = "assist_player_id", nullable = true)
     private Player assist;
 
     private Boolean onTarget;
-
-    @ManyToOne
-    @JoinColumn(name = "match_id")
-    @JsonIgnore
-    private Match match;
 
     public enum Type {
         GOAL, ASSIST, SHOT, TACKLE, PASS

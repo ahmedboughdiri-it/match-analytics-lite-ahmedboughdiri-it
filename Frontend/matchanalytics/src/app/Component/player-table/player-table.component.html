@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Players</h2>
+
+  <!-- Error handling -->
+  <div *ngIf="error() as err" class="error">
+    {{ err }}
+  </div>
+
+  <!-- Player Table -->
+  <table *ngIf="players().length > 0; else loading">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Team</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of players()">
+        <td>{{ p.idPlayer }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.team }}</td>
+        <td>{{ p.position }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Loading state -->
+  <ng-template #loading>
+    <p>⏳ Loading players...</p>
+  </ng-template>
+</div>
