@@ -1,42 +1,100 @@
-# Match Analytics Lite — Starter Template
+# Match Analytics Lite — Technical Test
 
-Welcome to the Match Analytics Lite 24-hour internship test.
+## Welcome
+Thank you for reviewing my submission for the **Football Analytics App Internship**.  
+This project is a 24-hour hands-on challenge designed to test full-stack fundamentals, data handling, and visualization skills.
 
-## Goal (24 hours)
-Build a minimal Match Analytics prototype for **one match**.
-You implement backend (Spring Boot), frontend (Angular), and simple visualizations.
-Keep it simple: focus on correctness, meaningful charts, and documentation.
+**Goal:** Build a small Match Analytics service and a single match dashboard that shows useful insights from match events. The focus is on simplicity, usability, and clarity.
 
-## Minimal requirements (must)
-1. Implement the following backend endpoints:
-   - GET /api/match  → returns a single match JSON (players + events)
-   - POST /api/event → add an event (goal, pass, tackle)
-   - GET /api/player/{id} → return player summary (goals, assists, formRating)
+---
 
-2. Frontend: single "Match Dashboard" page with:
-   - Players table (position, goals, assists, formRating)
-   - A chart (bar chart or simple heatmap) showing events aggregated per player or zone
-   - Event timeline list (chronological)
+## Overview
+- **Backend:** Spring Boot 3.5.5 (Java 17)  
+- **Database:** PostgreSQL 15  
+- **Frontend:** Angular 16.2 (Signals, Standalone Components)  
+- **Time:** 24 hours  
+- **Scope:** Single match, small dataset, 3 endpoints, one dashboard  
+- **Docker:** Backend + DB included  
 
-3. Seed data: use `seed/match.json` as initial data to implement GET /api/match.
+---
 
-4. README must include:
-   - How to run the project (docker optional)
-   - Which AI tools (if any) were used
-   - Short explanation of the formRating formula and assumptions
+## How to Run
 
-## Seed data
-See `seed/match.json` for a minimal example dataset.
+### **Option 1: Using Docker (Recommended)**
+1. Make sure Docker and Docker Compose are installed.
+2. In the project root, run:
 
-## Submission
-- Fork this repo via GitHub Classroom (you will receive a link).
-- Push your implementation to your fork within **24 hours**.
-- Document any incomplete parts in your README.
+```bash
+docker-compose up --build
 
-## Notes for reviewers
-Keep the evaluation pragmatic: this is a 24h test. We prioritize:
-- Working endpoints
-- Meaningful visualization
-- Clear README & commit history
+The backend will be available at: http://localhost:9090
 
-Good luck!
+The frontend will be available at: http://localhost:4200 (if included in Docker)
+
+Option 2: Running Frontend Locally
+
+Navigate to the frontend/matchanalytics folder:
+cd frontend
+
+
+Install dependencies:
+npm install
+
+
+Start the Angular app:
+ng serve
+
+
+Open your browser at http://localhost:4200.
+
+
+Backend Endpoints
+Endpoint	         Method	Description
+/api/match	      GET	   Returns a single match object with metadata, players, and events
+/api/event	      POST	   Accepts an event (goal, pass, tackle, shot, etc.) and stores/returns it
+/api/player/{id}	GET	   Returns simple player stats (goals, assists, rating)
+
+
+Database (PostgreSQL)
+
+Tables: match, player, event
+
+Seed data: 1 match, ~5–6 players per team, 10–15 events (passes/goals/tackles)
+
+Database connection configured via Docker environment variables.
+
+
+Frontend (Angular)
+
+Single Match Dashboard:
+
+Player table with basic stats (goals, assists, rating)
+
+Chart: goals/assists per player
+
+Bonus (optional): pitch map or pass network visualization
+
+Built with Signals and standalone components
+
+Responsive layout with global error handling
+
+Designed with DeepSeek for modern HTML structure and style
+
+
+Docker
+
+Dockerized backend and PostgreSQL for easy local deployment
+
+Frontend can run via Angular CLI if not Dockerized
+
+Run the full stack locally with:
+docker-compose up --build
+
+
+AI & Tools Disclosure
+
+ChatGPT (GPT-5): Assisted in implementing Docker setup, documentation, and optimizing some project explanations
+
+DeepSeek: Helped in designing modern frontend structure and HTML/CSS for dashboard layout
+
+Generated content: Only documentation, layout suggestions, and Docker guidance; core code logic was manually implemented
